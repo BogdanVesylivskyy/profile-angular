@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-profiles',
+  template: `<h3>Profile</h3>`,
   templateUrl: './profiles.component.html',
   styleUrls: ['./profiles.component.scss']
 })

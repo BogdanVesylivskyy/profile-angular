@@ -4,15 +4,18 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  template: `<div>
-    <h1>Angular routes</h1>
-    <nav>
-      <a routerLink="">Home</a>
-      <a routerLink="/profile">Profile</a>
-      <a routerLink="contact">Contact</a>
-    </nav>
-    <router-outlet></router-outlet>
-  </div>`
+  template: `<mat-toolbar color="primary" class="app-header">
+      <span class="nav-tool-items">
+        <a mat-button routerLink="">Home</a>
+        <a mat-button routerLink="/profile">Login</a>
+        <a mat-button routerLink="/contact">Contact</a>
+        <a mat-button routerLink="/login">Login</a>
+        <a mat-button routerLink="/logout" routerLinkActive="active">Logout</a>
+      </span>
+    </mat-toolbar>
+
+
+    <router-outlet></router-outlet>`
 })
 export class AppComponent {
   title = 'profile-angular-project';

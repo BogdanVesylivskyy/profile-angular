@@ -9,9 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class ProfilesComponent implements OnInit {
 
   photo = 'photo';
-  name: string;
-  surname: string;
-  birth: number;
+  name = 'name';
+  surname = 'surname';
+  birth = 'birth';
   number = 'phone number';
 
   constructor() { }

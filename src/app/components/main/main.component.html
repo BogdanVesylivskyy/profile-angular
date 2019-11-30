@@ -1,0 +1,9 @@
+<mat-toolbar color="primary" class="app-header">
+  <span class="nav-tool-items">
+    <a mat-button routerLink="profile" [routerLinkActive]="['active']">Profile</a>
+    <a mat-button routerLink="contact" [routerLinkActive]="['active']">Contact</a>
+    <button mat-raised-button (click)="logout()">Logout</button>
+  </span>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

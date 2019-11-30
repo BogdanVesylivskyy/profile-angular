@@ -1,36 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from './material.module';
 
-
-import { MatTabsModule } from '@angular/material/tabs';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule } from '@angular/material/card';
-
-
-import {MatTableModule} from '@angular/material/table';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatToolbarModule} from '@angular/material/toolbar';
-
-
-
-import {Routes, RouterModule} from '@angular/router';
 import { AppComponent } from './app.component';
+import { MainComponent } from './components/main/main.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { LogoutComponent } from './components/logout/logout.component';
 
- 
-// определение маршрутов
-const appRoutes: Routes =[
-    { path: '', component: AppComponent},
-    { path: 'profile', component: ProfilesComponent},
-    { path: 'contact', component: ContactsComponent},
-    { path: 'login', component: LoginFormComponent},
-    { path: 'logout', component: LogoutComponent}
-];
+import { StorageService } from './core/services/storage.service';
+import { AuthGuard } from './core/guard/guard';
 
 
 
@@ -40,20 +24,20 @@ const appRoutes: Routes =[
     ProfilesComponent,
     ContactsComponent,
     LoginFormComponent,
-    LogoutComponent
+    LogoutComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatTabsModule,
+
     BrowserAnimationsModule,
-    MatCardModule,
-    MatTableModule,
-    MatCheckboxModule,
-    MatToolbarModule,
-    RouterModule.forRoot(appRoutes)
+    ReactiveFormsModule,
+    MaterialModule,
   ],
-  providers: [],
+  providers: [StorageService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+

@@ -39,7 +39,6 @@ export class StorageService {
 
 
   updateUserInfo(user: UserInfo) {
-    console.log(user, 'user');
     localStorage.setItem('userData', JSON.stringify(Object.assign(this.getUser(), user)));
   }
 
@@ -48,11 +47,14 @@ export class StorageService {
       id: i,
       name: faker.name.firstName(),
       surname: faker.name.lastName(),
-      dateOfBirth: moment(faker.date.past()).format('DD-MM-YYYY'),
+      dateOfBirth: faker.date.past(),
       phoneNumber: faker.random.number({min: 380630000000, max: 380639999999}),
       profilePhoto: faker.image.avatar(),
+      login: faker.name.firstName(),
+      password: faker.name.firstName(),
     }));
-    localStorage.setItem('friendsData', JSON.stringify(list));
+    const frindsList = localStorage.setItem('friendsData', JSON.stringify(list));
+    return JSON.parse(localStorage.getItem('friendsData'));
   }
 
   getFriendsList() {
@@ -60,11 +62,23 @@ export class StorageService {
     return JSON.parse(retrievedFriends);
   }
 
-  deleteFriend(friendId) {
+  deleteFriend(friendId: number) {
     const friendsList = JSON.parse(localStorage.getItem('friendsData'));
     const filteredList = friendsList.filter((friend) => friend.id != friendId);
 
     localStorage.setItem('friendsData', JSON.stringify(filteredList));
+  }
+
+  getFriendProfile(friendId: number) {
+    const friendsList = JSON.parse(localStorage.getItem('friendsData'));
+    const filteredList = friendsList.filter((friend) => friend.id == friendId);
+    return Object.assign({}, ...filteredList);
+  }
+
+  updateFriendProfile(friendId: number, newFriend) {
+    const friendProfile = this.getFriendsList();
+    const updatedUser = friendProfile[friendId] = newFriend;
+    localStorage.setItem('friendsData', JSON.stringify([...friendProfile]));
   }
 
 }

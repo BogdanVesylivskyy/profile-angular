@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { UserInfo } from 'src/app/core/shared/userInfo';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -17,13 +18,22 @@ export class ProfilesComponent implements OnInit {
   userImg: string;
   buttonDisabled = true;
   textMsg = true;
+  userId: number;
 
-  constructor(private fb: FormBuilder, public storageService: StorageService ) { }
+  constructor(private fb: FormBuilder, public storageService: StorageService, private route: ActivatedRoute, private router: Router, ) {
+
+
+   }
 
   ngOnInit() {
+    this.userId = this.route.snapshot.queryParams.id;
+    if (this.userId) {
+      this.userinfo = this.storageService.getFriendProfile(this.userId);
+    } else {
+      this.userinfo = this.storageService.getUser();
+      this.router.navigate(['']);
+    }
 
-    this.userinfo = this.storageService.getUser();
-    console.log(this.userinfo, 'this.userinfo');
     this.userImg = this.userinfo.profilePhoto;
     this.userForm = this.fb.group({
       name: [this.userinfo.name, Validators.required],
@@ -35,6 +45,8 @@ export class ProfilesComponent implements OnInit {
       password: [this.userinfo.password, Validators.required],
       profilePhoto: [this.userImg, Validators.required],
     });
+
+
 
     this.userForm.valueChanges.subscribe(data => {
       this.buttonDisabled = false;
@@ -57,9 +69,16 @@ export class ProfilesComponent implements OnInit {
   onUpdate(event) {
     // event.preventDefault();s
 
+
+    if (this.userId) {
+     this.storageService.updateFriendProfile(this.userId, {id: +this.userId,  ...this.updatedUser});
+     this.buttonDisabled = true;
+     this.textMsg = false;
+    } else {
     this.storageService.updateUserInfo(this.updatedUser);
     this.textMsg = false;
     this.buttonDisabled = true;
+    }
   }
 
 

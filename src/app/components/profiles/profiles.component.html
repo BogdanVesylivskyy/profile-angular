@@ -39,7 +39,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" *ngIf="!userId">
         <input matInput placeholder="Login" formControlName="login">
         <mat-label>Login</mat-label>
         <mat-error *ngIf="userForm.controls.login.dirty && userForm.controls['login']?.touched">
@@ -49,7 +49,7 @@
 
 
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline"  *ngIf="!userId">
         <input matInput placeholder="password" formControlName="password">
         <mat-label>password</mat-label>
         <mat-error *ngIf="userForm.controls.password.dirty && userForm.controls['password']?.touched">
@@ -66,7 +66,8 @@
       <br />
       <input id="fileInput" type='file' (change)="onSelectFile($event)">
 
-      <p [hidden]="!userForm.valid || buttonDisabled">Your profile has changed!</p>
+
+      <p [hidden]="textMsg">Your profile has changed!</p>
       <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid || buttonDisabled"
         (click)="onUpdate()">Update</button>
     </form>

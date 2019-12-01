@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserSettings } from '../constants';
 import * as faker from 'faker';
+import * as moment from 'moment';
 import { UserInfo } from '../shared/userInfo';
 
 @Injectable({
@@ -10,10 +11,6 @@ import { UserInfo } from '../shared/userInfo';
 export class StorageService {
   // Define ADMIN_USER
   adminUser = UserSettings.ADMIN_USER;
-
-  // setUser() {
-  //   localStorage.setItem('userData', JSON.stringify(this.adminUser));
-  // }
 
   getUser() {
     const retrievedUser = localStorage.getItem('userData');
@@ -25,7 +22,6 @@ export class StorageService {
   }
 
   logout() {
-    console.log(this.getUser(), 'this.getUser()')
     localStorage.setItem('userData', JSON.stringify(Object.assign(this.getUser(), {isLogined: false})));
   }
 
@@ -45,6 +41,30 @@ export class StorageService {
   updateUserInfo(user: UserInfo) {
     console.log(user, 'user');
     localStorage.setItem('userData', JSON.stringify(Object.assign(this.getUser(), user)));
+  }
+
+  setFriendsList() {
+    const list = [...new Array(10).keys()].map((_, i) => ({
+      id: i,
+      name: faker.name.firstName(),
+      surname: faker.name.lastName(),
+      dateOfBirth: moment(faker.date.past()).format('DD-MM-YYYY'),
+      phoneNumber: faker.random.number({min: 380630000000, max: 380639999999}),
+      profilePhoto: faker.image.avatar(),
+    }));
+    localStorage.setItem('friendsData', JSON.stringify(list));
+  }
+
+  getFriendsList() {
+    const retrievedFriends = localStorage.getItem('friendsData');
+    return JSON.parse(retrievedFriends);
+  }
+
+  deleteFriend(friendId) {
+    const friendsList = JSON.parse(localStorage.getItem('friendsData'));
+    const filteredList = friendsList.filter((friend) => friend.id != friendId);
+
+    localStorage.setItem('friendsData', JSON.stringify(filteredList));
   }
 
 }

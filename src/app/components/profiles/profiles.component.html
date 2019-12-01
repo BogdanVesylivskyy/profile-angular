@@ -1,13 +1,74 @@
-<mat-card class="example-card">
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    <mat-card-header>
-        <mat-card-title>{{name}} {{surname}}</mat-card-title>
-        <mat-card-subtitle>{{birth}}</mat-card-subtitle>
-        <mat-card-subtitle>{{number}}</mat-card-subtitle>
-    </mat-card-header>
-    
-    <mat-card-actions>
-        <button mat-button>Edit</button>
-        <button mat-button>Update</button>
-    </mat-card-actions>
-</mat-card>
+<div>
+  <mat-card>
+    <form [formGroup]="userForm" class="user-form">
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="name" formControlName="name">
+        <mat-label>name</mat-label>
+        <mat-error *ngIf="userForm.controls.name.dirty && userForm.controls['name']?.touched">
+          First Name is invalid
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="surname" formControlName="surname">
+        <mat-label>surname</mat-label>
+        <mat-error *ngIf="userForm.controls.surname.dirty && userForm.controls['surname']?.touched">
+          surname is invalid
+        </mat-error>
+      </mat-form-field>
+
+
+
+
+      <mat-form-field appearance="outline">
+        <input matInput [matDatepicker]="picker" placeholder="dateOfBirth"
+          formControlName="dateOfBirth">
+        <mat-label>dateOfBirth</mat-label>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="userForm.controls.dateOfBirth.dirty && userForm.controls['dateOfBirth']?.touched">
+          dateOfBirth is invalid
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="phoneNumber" formControlName="phoneNumber" minlength="12" maxlength="12">
+        <mat-label>phoneNumber</mat-label>
+        <mat-error *ngIf="userForm.controls.phoneNumber.dirty && userForm.controls['phoneNumber']?.touched">
+          phoneNumber is invalid
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="Login" formControlName="login">
+        <mat-label>Login</mat-label>
+        <mat-error *ngIf="userForm.controls.login.dirty && userForm.controls['login']?.touched">
+          login is invalid
+        </mat-error>
+      </mat-form-field>
+
+
+
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="password" formControlName="password">
+        <mat-label>password</mat-label>
+        <mat-error *ngIf="userForm.controls.password.dirty && userForm.controls['password']?.touched">
+          password is invalid
+        </mat-error>
+      </mat-form-field>
+
+
+      <label class="hoverable" for="fileInput">
+        <img [src]="userImg" alt="UserLogo">
+        <div class="hover-text">Choose file</div>
+        <div class="background"></div>
+      </label>
+      <br />
+      <input id="fileInput" type='file' (change)="onSelectFile($event)">
+
+      <p [hidden]="!userForm.valid || buttonDisabled">Your profile has changed!</p>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid || buttonDisabled"
+        (click)="onUpdate()">Update</button>
+    </form>
+  </mat-card>
+</div>

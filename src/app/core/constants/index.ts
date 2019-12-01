@@ -1,7 +1,7 @@
 export class UserSettings {
   public static ADMIN_USER = {
-    userName: 'admin',
-    userPassword: 'admin',
+    login: 'admin',
+    password: 'admin',
     isLogined: false
   };
 }

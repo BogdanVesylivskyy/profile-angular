@@ -18,15 +18,8 @@ export class MainComponent implements OnInit {
 
   logout() {
     if (this.currentUser) {
-      localStorage.setItem(
-        "userData",
-        JSON.stringify(
-          Object.assign(this.currentUser, {
-            isLogined: false
-          })
-        )
-      );
-      this.router.navigate(["login"]);
+      this.storageService.logout();
+      this.router.navigate(['login']);
     }
   }
 }

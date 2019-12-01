@@ -2,7 +2,7 @@
 
 <div class="login-form">
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <input matInput placeholder="Login" formControlName="login">
       <mat-error *ngIf="profileForm.controls.login.hasError('required')">
         First Name is required

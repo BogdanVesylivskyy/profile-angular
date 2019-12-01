@@ -1,5 +1,5 @@
 export class User {
-  userName: string;
-  userPassword: any;
+  login: string;
+  password: any;
   isLogined: boolean;
 }

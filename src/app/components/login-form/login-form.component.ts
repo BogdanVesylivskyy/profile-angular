@@ -24,9 +24,8 @@ export class LoginFormComponent implements OnInit {
   constructor(private fb: FormBuilder, public storageService: StorageService, private router: Router) {}
 
   ngOnInit() {
-    this.storageService.setUser();
-    this.user = this.storageService.getUser();
-
+    this.user = this.storageService.getUser() ? this.storageService.getUser() : this.storageService.setUserInfo();
+    
     this.profileForm = this.fb.group({
       login: ['', Validators.required],
       password: ['', Validators.required],
@@ -43,7 +42,7 @@ export class LoginFormComponent implements OnInit {
 
 
     userNameField.valueChanges.subscribe(login => {
-      if (login !== this.user.userName) {
+      if (login !== this.user.login) {
         this.profileForm.controls.login.setErrors({
           invalid: true,
         });
@@ -51,7 +50,7 @@ export class LoginFormComponent implements OnInit {
     });
 
     passwordField.valueChanges.subscribe(pass => {
-      if (pass !== this.user.userPassword) {
+      if (pass !== this.user.password) {
         this.profileForm.controls.password.setErrors({
           invalid: true,
         });
@@ -61,7 +60,7 @@ export class LoginFormComponent implements OnInit {
 
   onSubmit() {
     if (this.profileForm.valid) {
-      localStorage.setItem('userData', JSON.stringify(Object.assign(this.user, {isLogined: true})));
+      this.storageService.login();
       this.router.navigate(['']);
     }
   }

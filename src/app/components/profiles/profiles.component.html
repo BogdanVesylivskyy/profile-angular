@@ -3,7 +3,7 @@
     <form [formGroup]="userForm" class="user-form">
       <mat-form-field appearance="outline">
         <input matInput placeholder="name" formControlName="name">
-        <mat-label>name</mat-label>
+        <mat-label>Name</mat-label>
         <mat-error *ngIf="userForm.controls.name.dirty && userForm.controls['name']?.touched">
           First Name is invalid
         </mat-error>
@@ -11,31 +11,28 @@
 
       <mat-form-field appearance="outline">
         <input matInput placeholder="surname" formControlName="surname">
-        <mat-label>surname</mat-label>
+        <mat-label>Surname</mat-label>
         <mat-error *ngIf="userForm.controls.surname.dirty && userForm.controls['surname']?.touched">
-          surname is invalid
+          Surname is invalid
         </mat-error>
       </mat-form-field>
-
-
-
 
       <mat-form-field appearance="outline">
         <input matInput [matDatepicker]="picker" placeholder="dateOfBirth"
           formControlName="dateOfBirth">
-        <mat-label>dateOfBirth</mat-label>
+        <mat-label>Date Of birth</mat-label>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error *ngIf="userForm.controls.dateOfBirth.dirty && userForm.controls['dateOfBirth']?.touched">
-          dateOfBirth is invalid
+            Date Of birth is invalid
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <input matInput placeholder="phoneNumber" formControlName="phoneNumber" minlength="12" maxlength="12">
-        <mat-label>phoneNumber</mat-label>
+        <mat-label>Phone number</mat-label>
         <mat-error *ngIf="userForm.controls.phoneNumber.dirty && userForm.controls['phoneNumber']?.touched">
-          phoneNumber is invalid
+            Phone number is invalid
         </mat-error>
       </mat-form-field>
 
@@ -43,20 +40,17 @@
         <input matInput placeholder="Login" formControlName="login">
         <mat-label>Login</mat-label>
         <mat-error *ngIf="userForm.controls.login.dirty && userForm.controls['login']?.touched">
-          login is invalid
+          Login is invalid
         </mat-error>
       </mat-form-field>
-
-
 
       <mat-form-field appearance="outline"  *ngIf="!userId">
         <input matInput placeholder="password" formControlName="password">
-        <mat-label>password</mat-label>
+        <mat-label>Password</mat-label>
         <mat-error *ngIf="userForm.controls.password.dirty && userForm.controls['password']?.touched">
-          password is invalid
+          Password is invalid
         </mat-error>
       </mat-form-field>
-
 
       <label class="hoverable" for="fileInput">
         <img [src]="userImg" alt="UserLogo">
@@ -65,7 +59,6 @@
       </label>
       <br />
       <input id="fileInput" type='file' (change)="onSelectFile($event)">
-
 
       <p [hidden]="textMsg">Your profile has changed!</p>
       <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid || buttonDisabled"

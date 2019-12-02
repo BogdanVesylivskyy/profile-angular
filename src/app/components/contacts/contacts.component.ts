@@ -21,9 +21,7 @@ export class ContactsComponent implements OnInit {
   ngOnInit() {
     this.dataSource = this.storageService.getFriendsList() ?
     this.storageService.getFriendsList() : new MatTableDataSource(this.storageService.setFriendsList());
-
   }
-
 
   deleteFriend(friend: number) {
     this.storageService.deleteFriend(friend);

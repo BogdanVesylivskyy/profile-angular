@@ -1,6 +1,6 @@
-<p>Login</p>
-
+<mat-card>
 <div class="login-form">
+  <p>Sign in</p>
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline">
       <input matInput placeholder="Login" formControlName="login">
@@ -22,6 +22,7 @@
       </mat-error>
     </mat-form-field>
 
-    <button  mat-raised-button color="primary" type="submit" [disabled]="!profileForm.valid">Submit</button>
+    <button  mat-raised-button color="primary" type="submit" [disabled]="!profileForm.valid">Login</button>
   </form>
 </div>
+</mat-card>
